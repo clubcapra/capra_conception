@@ -2,8 +2,6 @@
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
-LAYOUT_WITH_LEGEND
-
 Container(toolsContainer, "Tools", "C++ and ROS", "Provide tools to repair, debug and monitor the robot")
 Container_Boundary(robotContainer, "Robot System"){
     Component(motorComposant, "Motors", "ROS Nodelet", "Allows to control the motors")

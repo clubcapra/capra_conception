@@ -1,0 +1,36 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container(webUiContainer, "Web UI", "TypeScript and React", "Provide all of the functionalities to the operator via web browser")
+Container(simulationContainer, "Simulation", "C++ and ROS", "Simulate the robot in real world situation and test functionality in critical state")
+Container_Boundary(robotContainer, "Robot System"){
+    Component(motorComposant, "Motors", "ROS Nodelet", "Allows to control the motors")
+    Component(descriptionComposant, "Description", "ROS Node", "Represent of the robot in 3D")
+    Component(missionComposant, "Mission", "ROS Nodelet", "Provide service to start and end mission for each lane")
+    Component(estopComposant, "E-Stop", "Robot hardware", "Emergency control on the robot")
+    Component(motionDetectionComposant, "Motion Detection", "Robot hardware", "Provides information about motion detection from the sensors")
+    Component(SLAMDComposant, "SLAM", "ROS Nodelet", "Provides a map and a localisation of the robot")
+    Component(POIComposant, "Arm", "ROS Nodelet", "Provides a information about the point of interests detected")
+    Component(headlightsComposant, "Headlights", "ROS Nodelet", "Control the headlights of the robot")
+    Component(audioComposant, "Audio", "ROS Nodelet", "Provides communication through the robot")
+    Component(C02Composant, "C02", "ROS Nodelet", "Provides information about the CO2 from the sensors")
+    Component(armComposant, "Arm", "ROS Nodelet", "Allows to control the arm")
+    Component(sensorsComposant, "Sensors", "ROS Nodelet", "Provides the sensors states and raw data")
+    Component(robotComposant, "Robot", "ROS Nodelet", "Allows a simple interface to control and manage the system")
+    Component(monitoringComposant, "Monitoring", "ROS Nodelet", "Provides information on the robot and is current state")
+    Component(webServerComposant, "Web Server", "ROS Nodelet", "Provides WebSocket interface with the Web UI")
+}
+
+
+
+Rel(webUiContainer, webServerComposant, "Uses", "WebSocket / JSON")
+
+Rel(webServerComposant, robotComposant, "Configure")
+Rel(webServerComposant, monitoringComposant, "Read data")
+
+Rel(simulationContainer, sensorsComposant, "Simulate")
+
+Rel(monitoringComposant, sensorsComposant, "Uses")
+
+@enduml
