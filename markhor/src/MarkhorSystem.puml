@@ -5,9 +5,10 @@ Person(operatorPerson, "Operator", "A operator of the robot, with the static UI"
 Person(technicianPerson, "Technician", "A technician of the robot, with personal computer")
 System_Boundary(markhorSystem, "Markhor System") {
     Container(toolsContainer, "Tools", "C++ and ROS", "Provide tools to repair, debug and monitor the robot")
-    Container(robotContainer, "Robot System", "C++ and ROS", "The Robot Operating System (ROS) that process user input and sensor to manage the robot")
-    Container(simulationContainer, "Simulation", "C++ and ROS", "Simulate the robot in real world situation and test functionality in critical state")
-    Container(webUiContainer, "Web UI", "JavaScript and Vue", "Provide all of the functionnalities to the operator via web browser")
+    Container(robotContainer, "Robot System", "C++ and ROS", "Software to operate the robot")
+    Container(simulationContainer, "Simulation", "C++ and ROS", "Simulate the robot in real world situation and test it's functionalities")
+    Container(webUiContainer, "Web UI", "JavaScript and Vue", "Provides all of the functionnalities to the operator via web browser")
+    Container(sensorContainer, "Sensors", "Robot Hardware", "Provides sensors data")
 }
 
 Rel(operatorPerson, webUiContainer, "Uses")
@@ -17,4 +18,5 @@ Rel(webUiContainer, robotContainer, "Uses", "HTTPS")
 Rel(toolsContainer, robotContainer, "Uses", "SSH")
 Rel(simulationContainer, robotContainer, "Uses")
 
+Rel_D(robotContainer,sensorContainer,"Uses")
 @enduml
